@@ -4,8 +4,8 @@ from starlette.middleware.sessions import SessionMiddleware
 import uvicorn
 
 from app.core.config import SECRET_KEY
+from app.core.database import engine, Base
 from app.routers import *
-
 
 app = FastAPI(title="Online Shop")
 
@@ -24,6 +24,11 @@ api_router.include_router(cart_router)
 
 app.include_router(page_router)
 app.include_router(api_router)
+
+@app.on_event("startup")
+async def startup():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 
 if __name__ == "__main__":
