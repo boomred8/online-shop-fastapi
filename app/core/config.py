@@ -6,7 +6,7 @@ load_dotenv()
 
 
 DATABASE = os.getenv("PG_DATABASE")
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SESSION_SECRET_KEY")
 
 
 if not DATABASE:
