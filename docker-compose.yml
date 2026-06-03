@@ -3,12 +3,15 @@ services:
     image: postgres:16
     container_name: shop_postgres
     restart: always
+
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: shop_db
+
     ports:
       - "5432:5432"
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -16,10 +19,14 @@ services:
     build: .
     container_name: online_shop_app
     restart: always
+
     ports:
       - "8000:8000"
+
     environment:
       PG_DATABASE: postgresql+asyncpg://postgres:postgres@db:5432/shop_db
+      SECRET_KEY: super-secret-key
+
     depends_on:
       - db
 

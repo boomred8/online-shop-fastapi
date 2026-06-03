@@ -1,10 +1,9 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.sessions import SessionMiddleware
 import uvicorn
 
-from starlette.middleware.sessions import SessionMiddleware
-
-from app.core.config import secret_key
+from app.core.config import SECRET_KEY
 from app.routers import *
 
 
@@ -14,7 +13,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     SessionMiddleware,
-    secret_key=secret_key
+    secret_key=SECRET_KEY
 )
 
 api_router = APIRouter(prefix="/api/v1")
