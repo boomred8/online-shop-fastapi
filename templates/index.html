@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+        <h1>Welcome to Online Shop</h1>
+
+        <p>
+            Simple online store built with FastAPI, Jinja2 and PostgreSQL.
+        </p>
+
+        <a class="btn" href="/products">
+            Browse Products
+        </a>
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="feature-card">
+        <h3>Product Catalog</h3>
+        <p>View products with descriptions, prices and images.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>Shopping Cart</h3>
+        <p>Add products to your cart and manage your order.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>Checkout</h3>
+        <p>Create an order by entering your name and phone number.</p>
+    </div>
+
+</section>
+
+{% endblock %}

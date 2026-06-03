@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+Products
+{% endblock %}
+
+{% block content %}
+
+<h1>Products</h1>
+
+<div class="products-grid">
+
+    {% for product in products %}
+
+    <div class="product-card">
+
+        {% if product.image %}
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+        {% else %}
+            <img src="https://placehold.co/300x300" alt="No image">
+        {% endif %}
+
+        <h3>{{ product.name }}</h3>
+
+        <p>{{ product.description }}</p>
+
+        <p class="price">
+            {{ product.price }} ₸
+        </p>
+
+        {% if product.is_available %}
+            <p class="available">Available</p>
+        {% else %}
+            <p class="unavailable">Out of stock</p>
+        {% endif %}
+
+        <a class="btn" href="/products/{{ product.id }}">
+            View Product
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block content %}
+
+<h1>Shopping Cart</h1>
+
+{% if items %}
+
+<table class="cart-table">
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+    </tr>
+
+    {% for item in items %}
+
+    <tr>
+        <td>{{ item.product.name }}</td>
+
+        <td>{{ item.product.price }} ₸</td>
+
+        <td>
+            <div class="quantity-actions">
+
+                <form action="/api/v1/cart/decrease/{{ item.product.id }}" method="post">
+                    <button class="quantity-btn" type="submit">-</button>
+                </form>
+
+                <span>{{ item.quantity }}</span>
+
+                <form action="/api/v1/cart/increase/{{ item.product.id }}" method="post">
+                    <button class="quantity-btn" type="submit">+</button>
+                </form>
+
+            </div>
+        </td>
+
+        <td>{{ item.subtotal }} ₸</td>
+
+        <td>
+            <form action="/api/v1/cart/remove/{{ item.product.id }}" method="post">
+                <button class="btn btn-danger" type="submit">
+                    Remove
+                </button>
+            </form>
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+<div class="total">
+    Total: {{ total }} ₸
+</div>
+
+<br>
+
+<a class="btn" href="/checkout">
+    Proceed to Checkout
+</a>
+
+{% else %}
+
+<div class="empty-message">
+    <p>Your cart is empty.</p>
+
+    <a class="btn" href="/products">
+        Go to products
+    </a>
+</div>
+
+{% endif %}
+
+{% endblock %}
